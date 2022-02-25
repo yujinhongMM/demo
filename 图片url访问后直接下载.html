@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片url访问后直接下载</title>
+</head>
+<body>
+
+    <script>
+        /*
+            1. 用 JavaScript 创建一个隐藏的 <a> 标签
+            2. 设置它的 href 属性
+            3. 设置它的 download 属性
+            4. 用 JavaScript 来触发这个它的 click 事件
+        */
+        // 下载图片地址和图片名
+        function downloadImage(imgsrc, name) {
+            let image = new Image();
+            // 解决跨域 Canvas 污染问题 添加crossOrigin="anonymous"允许跨域
+            image.setAttribute("crossOrigin", "anonymous");
+            image.onload = function() {
+                let canvas = document.createElement("canvas");
+                canvas.width = image.width;
+                canvas.height = image.height;
+                let context = canvas.getContext("2d");
+                context.drawImage(image, 0, 0, image.width, image.height);
+                let url = canvas.toDataURL("image/png"); // 得到图片的base64编码数据
+                let a = document.createElement("a"); // 生成一个a元素
+                let event = new MouseEvent("click"); // 创建一个单击事件
+                a.download = name || "photo"; // 设置图片名称
+                a.href = url; // 将生成的URL设置为a.href属性
+                a.dispatchEvent(event); // 触发
+            }
+            image.src = imgsrc;
+        }
+    </script>
+</body>
+</html>

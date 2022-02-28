@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5drag&drop拖拽与拖放</title>
+</head>
+<body>
+    <p draggable="true" id="text">被拖动元素</p>
+
+    <div style="width:100px;height:100px;border:1px solid green;" id="box">
+        目的地对象
+    </div>
+    <script>
+        // 被拖动元素
+        const textDom = document.getElementById('text');
+        textDom.ondragstart = handle_start;
+        textDom.ondrag = handle_drag;
+        textDom.ondragend = handle_end;
+
+        // 目的地对象
+        const boxDom = document.getElementById('box');
+        boxDom.ondragenter = handle_enter;
+        boxDom.ondragover = handle_over;
+        boxDom.ondragleave = handle_leave;
+
+        boxDom.ondrop = handle_drop;
+
+        function handle_start(e) {
+            console.log('dragstart-在元素开始被拖动时候触发')
+        }
+        function handle_drag() {
+            console.log('drag-在元素被拖动时候反复触发')
+        }
+        function handle_end() {
+            console.log('dragend-在拖动操作完成时触发')
+        }
+
+        function handle_enter(e) {
+            console.log('handle_enter-当元素进入目的地时触发')
+            // 阻止浏览器默认行为
+            e.preventDefault()
+        }
+        function handle_over(e) {
+            console.log('handle_over-当元素在目的地时触发')
+            // 阻止浏览器默认行为
+            e.preventDefault()
+        }
+        function handle_leave(e) {
+            console.log('handle_leave-当元素离开目的地时触发')
+            // 阻止浏览器默认行为
+            // e.preventDefault()
+        }
+        function handle_drop(e) {
+            console.log('handle_drop-当元素在目的地放下时触发')
+            var t = Date.now()
+            boxDom.innerHTML = ''
+            boxDom.append(t + '-拖放触发的事件。')
+            e.preventDefault()
+        }
+    </script>
+</body>
+</html>

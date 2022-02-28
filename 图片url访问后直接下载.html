@@ -7,7 +7,10 @@
     <title>图片url访问后直接下载</title>
 </head>
 <body>
-
+    href属性的地址必须是和你前端js非跨域的地址，如果引用的是第三方的网站或者说是前后端分离的项目，调用后台的接口，这时download就会不起作用。
+    <a href="http://n.sinaimg.cn/photo/transform/700/w1000h500/20211002/3c9c-4fecc919c8af637a9f6cc7c82b4cf3bc.jpg" download="1">a标签下载图片</a>
+    <div onclick="downloadImage('http://n.sinaimg.cn/photo/transform/700/w1000h500/20211002/3c9c-4fecc919c8af637a9f6cc7c82b4cf3bc.jpg','2.jpg')">模拟a标签下载</div>
+    <div></div>
     <script>
         /*
             1. 用 JavaScript 创建一个隐藏的 <a> 标签

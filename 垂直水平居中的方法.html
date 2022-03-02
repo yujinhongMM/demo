@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            height: 100px;
+            width: 100px;
+            background: black;
+        }
+        .box-style1 {
+            position: relative;
+        }
+        .in {
+            height: 25px;
+            width: 25px;
+            background: red;
+        }
+        .in-style1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -12.5px 0 0 -12.5px;
+        }
+        .in-style2 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .in-style3 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+        }
+        .box-style2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .box-style3 {
+            display: grid;
+            align-items:center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>
+            <p>使用绝对定位和负外边距对块级元素进行垂直水平居中</p>
+            <p>负外边距为需要居中元素的一半，缺点就是需要知道需要居中元素的宽高</p>
+            <div class="box box-style1">
+                <div class="in in-style1"></div>
+            </div>
+        </li>
+        <li>
+            <p>使用绝对定位和transform反向偏移</p>
+            <p>父级relative，子级absolte，top 50%, left: 50%, transform: translate(-50%, -50%)</p>
+            <div class="box box-style1">
+                <div class="in in-style2"></div>
+            </div>
+        </li>
+        <li>
+            <p>绝对定位结合margin: auto</p>
+            <div class="box box-style1">
+                <div class="in in-style3"></div>
+            </div>
+        </li>
+        <li>
+            <p>使用flex布局</p>
+            <p>父级设置为display: flex; justify-content: center; align-items: center;</p>
+            <div class="box box-style2">
+                <div class="in"></div>
+            </div>
+        </li>
+        <li>
+            <p>网格布局</p>
+            <p>父级设置为display: grid; justify-content: center; align-items: center;</p>
+            <div class="box box-style3">
+                <div class="in"></div>
+            </div>
+        </li>
+    </ul>
+</body>
+</html>

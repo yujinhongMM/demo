@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>画一条0.5px的线</title>
+    <style>
+        .onePx {
+            width: 500px;
+            height: 1px;
+            background: black;
+        }
+        .linerGradient {
+            width: 500px;
+            height: 1px;
+            background: linear-gradient(0, black, transparent);
+        }
+        .transformScaleY {
+            width: 500px;
+            height: 1px;
+            background: black;
+            transform: scaleY(0.5);
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>
+            <p>1px的线条：</p>
+            <div class="onePx"></div>
+        </li>
+        <li>
+            <p>使用linear-gradient(角度,颜色1,颜色2,颜色3,....)绘制0.5px的线</p>
+            <div class="linerGradient"></div>
+        </li>
+        <li>
+            <p>使用tranform: scaleY(0.5)</p>
+            <div class="transformScaleY"></div>
+        </li>
+        <li>
+            <p>
+                initial-scale=0.5<br/>
+                &lt;meta name="viewport" content="width=device-width, initial-scale=0.5"&gt;<br/>
+                注意：移动端适用，字体也会变小，原理是css的1px在手机上并不是物理上的1像素，可能是2像素，initial-scale的值改为0.5之后就只代表1像素
+            </p>
+        </li>
+    </ul>
+</body>
+</html>

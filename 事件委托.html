@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件委托</title>
+</head>
+<body>
+    <div id="parents">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+    </div>
+    <script>
+        document.getElementById('parents').addEventListener('click', (event) => {
+            event.target.style.color = 'green';
+        }, false)
+        // 如果没有指定， 第三个参数 默认为 false 为冒泡捕获。true 为事件捕获 
+        document.getElementById('parents').addEventListener('click', (event) => {
+            event.target.innerHTML = 'green';
+            event.target.style.color = 'blue';
+        }, true)
+    </script>
+</body>
+</html>

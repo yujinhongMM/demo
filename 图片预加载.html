@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片预加载</title>
+    <style>
+        #box2 {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="box1">0%</div>
+    <div id="box2">
+        <img src="./images/1.png" />
+        <img src="./images/2.png" />
+        <img src="./images/3.png" />
+        <img src="./images/4.png" />
+    </div>
+    <p>1 使用new Image()动态的创建img。</p>
+    <p>2 设置其src为要加载的图片，来实现预载。</p>
+    <p>3 使用onload方法回调预载完成事件（也就是当预载完成之后，执行想要的操作）。</p>
+    <p>只要浏览器把图片下载到本地，同样的src就会使用缓存，这是最基本也是最实用的预载方法。</p>
+    <p>另外，当Image下载完图片后，会得到宽和高，因此也可以在预载前得到图片的大小(可以用计时器轮循宽高变化)。</p>
+    <script>
+        const dom1 = document.getElementById('box1');
+        const loadImg = [
+            './images/1.png',
+            './images/2.png',
+            './images/3.png',
+            './images/4.png',
+        ]; // 创建一个数组，用于存储所有要预加载的图片路径
+        const len = loadImg.length;
+        let nowNum = 0;
+        for (let i = 0; i < len; i++) {
+            // 每一次i变化之后，都需要执行这样的内容 - 创建一个img对象，将img对象的src设置为相应的图片地址
+            const newImg = new Image();
+            newImg.src = loadImg[i];
+            // 每一张图片加载完成之后，都可以执行相应的功能，比如我们在制作loading条时，希望每加载一张图片之后就能够将当前进度显示出来，就可以用这个方法
+            newImg.onload = function() {
+                nowNum++;
+                if(nowNum === len) {
+                    // 加载完成一张图片之后，我们还可以判断是否完成了所有图片的加载，如果完成再执行相应的内容
+                    dom1.style.display = 'none';
+                    document.getElementById('box2').style.display = 'block';
+                }
+                dom1.innerText = nowNum / len * 100 + '%';
+                console.log(nowNum / len * 100, '%');
+            }
+        }
+    </script>
+</body>
+</html>

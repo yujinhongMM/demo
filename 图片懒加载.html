@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片懒加载</title>
+    <style>
+        img {
+            width: 100px;
+            height: 500px;
+        }
+        li {
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    学习的网址：https://zhuanlan.zhihu.com/p/55311726 不一定里面说的对
+    <ul>
+        <li>监听scroll滚动条</li>
+        <li>使用getBoundingClientRect</li>
+        <li>使用IntersectionObserver</li>
+    </ul>
+    <ul class="list">
+        <li>
+            <img src="" data-src="./images/1.png" />
+        </li>
+        <li>
+            <img src="" data-src="./images/2.png" />
+        </li>
+        <li>
+            <img src="" data-src="./images/3.png" />
+        </li>
+        <li>
+            <img src="" data-src="./images/4.png" />
+        </li>
+    </ul>
+    <script>
+        window.onload = () => {
+            const elesImg = document.querySelectorAll('.list li img');
+            // 选项
+            const options = {
+                // 表示重叠面积占被观察者的比例，从0 - 1 取值；
+                // 1 表示完全被包含
+                threshold: 0.01,
+                root: null // 必须是目标元素的父级元素，目标视窗即目标元素的父元素，如果没有提供，则蓦然body元素
+            }
+
+            // 回调函数
+            const callback = (entries) => {
+                entries.forEach((item) => {
+                    // 当前元素可见 
+                    if (item.isIntersecting) {
+                        console.log(item.target);
+                        item.target.src = item.target.getAttribute("data-src");
+                        // 取消事件绑定
+                        observer.unobserve(item.target)
+                    }
+                })
+            }
+
+            // 创建观察者
+            var observer = new IntersectionObserver(callback, options);
+
+            // 加入观察
+            elesImg.forEach(item => {
+                observer.observe(item)
+            })
+        }
+    </script>
+</body>
+</html>

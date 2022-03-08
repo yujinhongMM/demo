@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box1 {
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+        #box1>div {
+            width: 100px;
+            height: 100px;
+            background: blue;
+        }
+        #box2 {
+            width: 200px;
+            height: 200px;
+            background: green;
+        }
+        #box2>div {
+            width: 100px;
+            height: 100px;
+            background: blue;
+        }
+    </style>
+</head>
+<body>
+    <div id = "box1"> 
+        <div></div>
+    </div>
+    <div id = "box2"> 
+        <div></div>
+    </div>
+    <p>mouseenter：当鼠标移入某元素时触发。</p>
+    <p>mouseleave：当鼠标移出某元素时触发。</p>
+
+    <p>mouseover：当鼠标移入某元素时触发，移入和移出其子元素时也会触发。</p>
+    <p>mouseout：当鼠标移出某元素时触发，移入和移出其子元素时也会触发。</p>
+    
+    <p>mousemove：鼠标在某元素上移动时触发，即使在其子元素上也会触发。</p>
+    <p>mouseout、mouseover和mouseleave、mouseenter最大的区别，在于子元素连带触发。</p>
+    <script>
+        const box1 = document.getElementById("box1");
+        const box2 = document.getElementById("box2");
+        box1.addEventListener('mouseover', (event) => {
+            console.log('%c [ event ]-42', 'font-size:13px; background:green; color:#bf2c9f;', event.target)
+            event.target.style.background = 'yellow';
+            console.log('mouseover')
+        }, false);
+        box2.addEventListener('mouseenter', (event) => {
+            console.log('%c [ event ]-46', 'font-size:13px; background:pink; color:#bf2c9f;', event.target)
+            event.target.style.background = 'black';
+            console.log('mouseenter')
+        }, false);
+    </script>
+</body>
+</html>

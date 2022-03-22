@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用纯css实现跑马灯</title>
+</head>
+<style>
+    @keyframes marqueeAnim {
+        0% {
+            transform: translateX(100vw);
+        }
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+
+    .marquee-content {
+        white-space: nowrap;
+        display: inline-flex;
+        color: chocolate;
+        animation: marqueeAnim 5s linear 0s infinite;
+    }
+    .marquee-content>span {
+        width: 300px;
+    }
+    .marquee-root {
+        width: 100vw;
+        height: 30px;
+        text-align: left;
+        line-height: 30px;
+        overflow: hidden;
+        background-color: burlywood;
+    }
+</style>
+<body>
+    <div class="marquee-root">
+        <div class="marquee-content" id="marquee-content">
+            <span>李先生1：获得多少多少元</span>
+            <span>李先生2：获得多少多少元</span>
+            <span>李先生3：获得多少多少元</span>
+            <span>李先生4：获得多少多少元</span>
+            <span>李先生5：获得多少多少元</span>
+            <span>李先生6：获得多少多少元</span>
+        </div>
+    </div>
+    <script>
+        const marqueeList = document.querySelectorAll("#marquee-content span");
+        const marqueeClass = document.querySelectorAll(".marquee-content");
+        marqueeClass.forEach(item => {
+            item.style.animationDuration = 5 * marqueeList.length + 's';
+        })
+    </script>
+</body>
+</html>

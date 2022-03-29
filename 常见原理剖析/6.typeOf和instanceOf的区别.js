@@ -29,8 +29,31 @@ console.log([].__proto__.__proto__ === Object.prototype);
 
 // 自己实现instanceof
 function instanceOf(A, B) {
-    bPrototype = B.prototype;
+    prototype = B.prototype;
     while (1) {
-        if (A)
+        if (A.__proto__ === prototype) {
+            return true;
+        }
+        if (A.__proto__ === null) {
+            return false;
+        }
+        A = A.__proto__;
     }
 }
+
+console.log(instanceOf(a, A));
+
+let str = 'hello';
+console.log(str instanceof String); // => false
+console.log(String[Symbol.hasInstance](str));
+
+class ValidateStr {
+    static [Symbol.hasInstance](x) {
+        return typeof x === 'string';
+    }
+}
+
+console.log('hello' instanceof ValidateStr);
+
+
+// 找对象的constructor

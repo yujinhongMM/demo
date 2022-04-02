@@ -80,6 +80,7 @@ class XMLHttpRequestFn {
     xhr.onload = () => {
         console.log(xhr.response);
     }
+    xhr.send();
 })();
 
 

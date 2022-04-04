@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="tree"></div>
+    <button onclick="start()">开始监听</button>
+    <button onclick="changeAttr()">修改属性</button>
+    <button onclick="editChild()">添加和删除子节点</button>
+    <script>
+        let treeDiv = document.getElementById('tree');
+        /**
+         * attributes 属性变化
+         * childList 子节点变化
+         * subtree 子数变化
+         * */
+        const config = { attributes: true, childList: true, subtree: true };
+        function callback(mutationList) {
+            console.log('%c [ mutationList ]-23', 'font-size:13px; background:pink; color:#bf2c9f;', mutationList)
+        }
+
+        // 如果观察到了DOM变更，就会把callback放在微任务队列中
+        // 然后等主代码完成后，清空微任务队列的时候会执行callback
+        let observer = new MutationObserver(callback);
+        function start() {
+            /**
+             * treeDiv 监听的节点
+             * config 配置
+             * */
+            observer.observe(treeDiv, config);
+        }
+        function changeAttr() {
+            treeDiv.setAttribute('data-name', '树');
+        }
+        function editChild() {
+            let div = document.createElement('div');
+            div.innerHTML = '子节点';
+            treeDiv.appendChild(div);
+            setTimeout(() => {
+                treeDiv.removeChild(div);
+            }, 4000);
+        }
+        start();
+        changeAttr();
+        editChild();
+    </script>
+
+    <div>
+        <div>输出结果：</div>
+        <div>(2) [MutationRecord, MutationRecord]</div>
+        <div>解释：这个在changeChild执行完，以及editChild的主代码执行完，把setTimeout放到宏任务队列，后把callback放到微任务队列，然后执行所有的微任务</div>
+        <div>[MutationRecord]</div>
+        <div>点击的时候，宏任务和微任务自己区分</div>
+    </div>
+    
+</body>
+</html>
